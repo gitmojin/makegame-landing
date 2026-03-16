@@ -298,13 +298,13 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-badge">Now in beta</div>
+    <div class="hero-badge">Coming soon — Private beta</div>
     <h1>Describe a game.<br><em>Play it in 5 minutes.</em></h1>
     <p class="hero-sub">
       AI-powered game creation. Pick a genre, describe what you want, watch it build in real-time. No code, no engine, no learning curve.
     </p>
     <div class="cta-group">
-      <a href="#" class="cta cta-primary" id="cta-start">Start Building — Free</a>
+      <a href="#waitlist" class="cta cta-primary" id="cta-start">Join the Waitlist</a>
       <a href="#how" class="cta cta-secondary">See How It Works</a>
     </div>
   </section>
@@ -380,8 +380,48 @@
     <p>
       Weekly game jams with cash prizes. Build your game in 24 hours, compete against other creators, get voted by the community. The best games get published.
     </p>
-    <a href="#" class="cta cta-primary">Join the Waitlist</a>
+    <a href="#waitlist" class="cta cta-primary">Join the Waitlist</a>
   </section>
+
+  <!-- Waitlist -->
+  <section class="section" id="waitlist" style="text-align: center; border-top: 1px solid rgba(var(--text), 0.06);">
+    <div class="section-label">Get Early Access</div>
+    <h2>Join the private beta</h2>
+    <p style="color: rgb(var(--text-muted)); max-width: 440px; margin: 0 auto 2rem; font-size: 1.05rem;">
+      We're letting in a small group of creators first. Drop your email and we'll send you an invite when your spot opens up.
+    </p>
+    <form id="waitlist-form" style="max-width: 400px; margin: 0 auto; display: flex; gap: 0.75rem;">
+      <input type="email" id="waitlist-email" placeholder="you@example.com" required style="
+        flex: 1;
+        padding: 0.75rem 1rem;
+        background: rgb(var(--surface));
+        border: 1px solid rgba(var(--text), 0.12);
+        border-radius: 12px;
+        color: rgb(var(--text));
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        outline: none;
+      ">
+      <button type="submit" class="cta cta-primary" style="white-space: nowrap;">Get Invited</button>
+    </form>
+    <p id="waitlist-success" style="display: none; color: rgb(var(--accent)); font-family: var(--font-mono); font-size: 0.8rem; margin-top: 1rem;">
+      You're on the list. We'll be in touch.
+    </p>
+  </section>
+
+  <script>
+    document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('waitlist-email').value;
+      // Store locally for now — replace with real backend when ready
+      const waitlist = JSON.parse(localStorage.getItem('makegame_waitlist') || '[]');
+      waitlist.push({ email, date: new Date().toISOString() });
+      localStorage.setItem('makegame_waitlist', JSON.stringify(waitlist));
+      console.log('[waitlist]', email);
+      this.style.display = 'none';
+      document.getElementById('waitlist-success').style.display = 'block';
+    });
+  </script>
 
   <!-- Footer -->
   <footer>
